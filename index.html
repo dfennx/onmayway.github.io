@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Web Project</title>
+    <title>OnMyWay</title>
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -20,29 +22,148 @@
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             color: #1A1A1A;
-        }
-
-        /* Görseli üstte ortalamak için */
-        .ust-orta {
             display: flex;
-            justify-content: center;
-            padding-top: 20px;        /* Biraz daha az üst boşluk */
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* İyice küçültülmüş görsel */
+        /* Ana içerik */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 12vh;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        /* Mini görsel */
         .kucuk-gorsel {
-            width: 80px;     /* Daha da küçük! */
+            width: 70px;
             height: auto;
             border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        /* BAKIMDA yazısı */
+        .bakimda {
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: #2C3E66;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+        }
+
+        /* Yakında Hizmetinizde yazısı */
+        .yakinda {
+            font-size: 24px;
+            font-weight: 400;
+            color: #5A6B8C;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        /* Açıklama metni */
+        .aciklama {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #3A4A6B;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            opacity: 0.9;
+        }
+
+        /* Bizi takip et bölümü */
+        .takip-et {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .takip-et p {
+            font-size: 16px;
+            font-weight: 500;
+            color: #4A5A7A;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Instagram logosu */
+        .instagram-link {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.1);  /* Üzerine gelince büyüsün */
+        }
+
+        .instagram-icon {
+            font-size: 48px;
+            color: #2C3E66;  /* Arka plana uyumlu renk */
+            transition: color 0.3s ease;
+        }
+
+        .instagram-link:hover .instagram-icon {
+            color: #E1306C;  /* Instagram'ın orijinal rengi */
+        }
+
+        /* Mobil uyum */
+        @media (max-width: 768px) {
+            .hero {
+                margin-top: 8vh;
+            }
+            
+            .bakimda {
+                font-size: 52px;
+            }
+            
+            .yakinda {
+                font-size: 20px;
+                margin-bottom: 25px;
+            }
+            
+            .aciklama {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+            
+            .instagram-icon {
+                font-size: 42px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Mini görsel üstte ortada -->
-    <div class="ust-orta">
-        <img src="img/OMW.png" alt="OMW Görseli" class="kucuk-gorsel">
-    </div>
+    <!-- Ana içerik -->
+    <div class="hero">
+        <img src="img/OMW.png" alt="OnMyWay Logo" class="kucuk-gorsel">
+        <h1 class="bakimda">BAKIMDA</h1>
+        <p class="yakinda">Yakında Hizmetinizde</p>
+        
+        <!-- Açıklama metni -->
+        <p class="aciklama">
+            Geleceğin eğitim vizyonunu OnMyWay ile yeniden keşfetmeye hazır mısınız?<br>
+            Hazırlıklarımız neredeyse tamamlandı.
+        </p>
 
-    <!-- İleride eklenecek içerik için alan -->
+        <!-- Bizi takip et ve Instagram -->
+        <div class="takip-et">
+            <p>BİZİ TAKİP ET</p>
+            <a href="https://instagram.com/onmywayedu" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="instagram-link"
+               title="Instagram'da takip edin">
+                <i class="fab fa-instagram instagram-icon"></i>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
