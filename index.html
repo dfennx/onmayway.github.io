@@ -20,23 +20,29 @@
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             color: #1A1A1A;
-            /* Görseli ortalamak için flexbox kullanıyoruz */
-            display: flex;
-            justify-content: center;  /* Yatayda ortalama */
-            align-items: center;      /* Dikeyde ortalama */
         }
 
-        /* Görsel için ek stiller (isteğe bağlı) */
-        .ortadaki-gorsel {
-            max-width: 90%;  /* Mobilde taşmasın */
-            height: auto;    /* Oranını korusun */
-            border-radius: 10px;  /* Hafif yuvarlak köşe (istersen kaldır) */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);  /* Hafif gölge (istersen kaldır) */
+        /* Görseli üstte ortalamak için */
+        .ust-orta {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;        /* Biraz daha az üst boşluk */
+        }
+
+        /* İyice küçültülmüş görsel */
+        .kucuk-gorsel {
+            width: 80px;     /* Daha da küçük! */
+            height: auto;
+            border-radius: 6px;
         }
     </style>
 </head>
 <body>
-    <!-- Görselimiz - NOT: Dosya yolunu kontrol et -->
-    <img src="img/OMW.png" alt="OMW Görseli" class="ortadaki-gorsel">
+    <!-- Mini görsel üstte ortada -->
+    <div class="ust-orta">
+        <img src="img/OMW.png" alt="OMW Görseli" class="kucuk-gorsel">
+    </div>
+
+    <!-- İleride eklenecek içerik için alan -->
 </body>
 </html>
