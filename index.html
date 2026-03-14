@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>OnMyWay</title>
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,19 +15,20 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             font-family: 'Inter', sans-serif;
             color: #FFFFFF;
-            background: #1A1B1E;
-            background: radial-gradient(circle at 50% 50%, #2A2C30 0%, #0F1012 100%);
+            background: #0A0B0E;  /* Daha stabil koyu ton */
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Liquid Glass Arkaplan Efekti */
+        /* Liquid Glass Arkaplan Efekti - iOS Optimize */
         .liquid-bg {
             position: fixed;
             top: 0;
@@ -36,17 +37,19 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
+            background: #0A0B0E;  /* Fallback renk */
         }
 
         .liquid-blob {
             position: absolute;
             width: 60vw;
             height: 60vw;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 70%);
+            background: radial-gradient(circle at 30% 30%, rgba(80, 100, 140, 0.2), transparent 70%);
             border-radius: 50%;
-            filter: blur(60px);
-            animation: liquidMove 20s ease-in-out infinite;
-            opacity: 0.4;
+            filter: blur(50px);
+            animation: liquidMove 25s ease-in-out infinite;
+            opacity: 0.5;
+            will-change: transform;
         }
 
         .liquid-blob-2 {
@@ -55,11 +58,12 @@
             height: 80vw;
             right: -20vw;
             top: -20vw;
-            background: radial-gradient(circle at 70% 70%, rgba(100, 150, 255, 0.12), transparent 70%);
+            background: radial-gradient(circle at 70% 70%, rgba(60, 90, 150, 0.15), transparent 70%);
             border-radius: 50%;
-            filter: blur(80px);
-            animation: liquidMove 25s ease-in-out infinite reverse;
-            opacity: 0.3;
+            filter: blur(60px);
+            animation: liquidMove 30s ease-in-out infinite reverse;
+            opacity: 0.4;
+            will-change: transform;
         }
 
         .liquid-blob-3 {
@@ -68,11 +72,12 @@
             height: 50vw;
             left: 10vw;
             bottom: -10vw;
-            background: radial-gradient(circle at 40% 60%, rgba(200, 220, 255, 0.1), transparent 70%);
+            background: radial-gradient(circle at 40% 60%, rgba(100, 120, 180, 0.1), transparent 70%);
             border-radius: 50%;
-            filter: blur(70px);
-            animation: liquidMove 18s ease-in-out infinite;
-            opacity: 0.25;
+            filter: blur(55px);
+            animation: liquidMove 22s ease-in-out infinite;
+            opacity: 0.35;
+            will-change: transform;
         }
 
         .glass-overlay {
@@ -81,8 +86,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(120px);
+            background: rgba(10, 11, 14, 0.3);
+            backdrop-filter: blur(100px);
+            -webkit-backdrop-filter: blur(100px);
             z-index: -1;
         }
 
@@ -91,24 +97,24 @@
                 transform: translate(0, 0) scale(1);
             }
             33% {
-                transform: translate(5%, 5%) scale(1.1);
+                transform: translate(4%, 4%) scale(1.05);
             }
             66% {
-                transform: translate(-5%, -5%) scale(0.9);
+                transform: translate(-4%, -4%) scale(0.95);
             }
         }
 
         /* Hamburger Menü - OMW Tasarımı */
         .menu-container {
             position: fixed;
-            top: 30px;
-            left: 30px;
+            top: 20px;
+            left: 20px;
             z-index: 1000;
         }
 
         .hamburger {
-            width: 45px;
-            height: 45px;
+            width: 44px;
+            height: 44px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -117,67 +123,50 @@
             cursor: pointer;
             z-index: 1001;
             position: relative;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 16px;
-            padding: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s ease;
+            background: rgba(20, 22, 26, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 10px 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+                        inset 0 0.5px 1px rgba(255, 255, 255, 0.1);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
         }
 
-        .hamburger:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.15);
+        .hamburger:active {
+            transform: scale(0.96);
+            background: rgba(30, 32, 36, 0.6);
         }
 
-        /* O - M - W harfleri için */
         .hamburger span {
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 0;
-        }
-
-        /* Harf görünümü için pseudo-elementler */
-        .hamburger span::before {
-            display: none;
-        }
-
-        /* O harfi efekti (üst çizgi) */
-        .hamburger span:nth-child(1) {
-            width: 80%;
+            height: 3px;
             background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            transition: all 0.25s ease;
         }
 
-        /* M harfi efekti (orta çizgi - daha kalın) */
+        .hamburger span:nth-child(1) {
+            width: 70%;
+            align-self: flex-start;
+        }
+
         .hamburger span:nth-child(2) {
             width: 100%;
             height: 4px;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.95);
             margin: 2px 0;
         }
 
-        /* W harfi efekti (alt çizgi) */
         .hamburger span:nth-child(3) {
-            width: 70%;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            width: 65%;
             align-self: flex-end;
         }
 
-        /* Aktif durumda X'e dönüşüm */
         .hamburger.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 6px);
-            width: 80%;
+            width: 75%;
             background: #FFFFFF;
         }
 
@@ -187,30 +176,29 @@
         }
 
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -8px);
-            width: 80%;
+            transform: rotate(-45deg) translate(3px, -8px);
+            width: 75%;
             background: #FFFFFF;
-            align-self: flex-start;
         }
 
         /* Açılır Menü Paneli - YATAY DİKDÖRTGEN */
         .dropdown-menu {
             position: absolute;
-            top: 60px;
+            top: 55px;
             left: 0;
-            width: 400px;  /* Daha geniş - yatay dikdörtgen */
-            background: rgba(25, 27, 32, 0.65);
-            backdrop-filter: blur(12px);  /* Daha az bulanıklık */
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
-                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 380px;
+            background: rgba(18, 20, 24, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                        inset 0 0.5px 1px rgba(255, 255, 255, 0.1);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-20px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transform: translateY(-15px) scale(0.97);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
             z-index: 999;
         }
 
@@ -220,31 +208,29 @@
             transform: translateY(0) scale(1);
         }
 
-        /* Yatay dikdörtgen için menü düzeni */
         .menu-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
             color: #FFFFFF;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 16px;
             letter-spacing: -0.3px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .menu-title i {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 22px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
         }
 
-        /* Menü öğelerini iki sütunlu yapalım (yatay dikdörtgen için) */
         .menu-items {
             list-style: none;
             display: grid;
-            grid-template-columns: 1fr 1fr;  /* İki sütun */
-            gap: 8px;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
             padding: 0;
         }
 
@@ -253,51 +239,45 @@
         }
 
         .menu-items li.instagram-item {
-            grid-column: span 2;  /* Instagram iki sütunu birden kaplasın */
-            margin-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
+            grid-column: span 2;
+            margin-top: 12px;
+            border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+            padding-top: 12px;
         }
 
         .menu-items a {
             text-decoration: none;
             color: rgba(255, 255, 255, 0.7);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 16px;
-            transition: all 0.3s ease;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            transition: all 0.2s ease;
             letter-spacing: -0.2px;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border: 0.5px solid rgba(255, 255, 255, 0.03);
+            -webkit-touch-callout: none;
         }
 
         .menu-items a i {
-            width: 20px;
-            font-size: 16px;
+            width: 18px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
-        .menu-items a:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: #FFFFFF;
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .menu-items a:hover i {
-            color: #FFFFFF;
-            transform: scale(1.1);
+        .menu-items a:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(0.98);
         }
 
         .instagram-item a {
-            background: rgba(225, 48, 108, 0.1);
+            background: rgba(225, 48, 108, 0.15);
             border-color: rgba(225, 48, 108, 0.2);
-            color: rgba(255, 255, 255, 0.9);
+            color: #FFFFFF;
             font-weight: 600;
             justify-content: center;
         }
@@ -306,9 +286,8 @@
             color: #E1306C;
         }
 
-        .instagram-item a:hover {
-            background: rgba(225, 48, 108, 0.2);
-            border-color: rgba(225, 48, 108, 0.4);
+        .instagram-item a:active {
+            background: rgba(225, 48, 108, 0.25);
         }
 
         .menu-overlay {
@@ -317,13 +296,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 998;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .menu-overlay.active {
@@ -331,47 +310,42 @@
             visibility: visible;
         }
 
-        /* Ana içerik - Liquid Glass Container */
+        /* Ana içerik */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 20px;
             position: relative;
             z-index: 1;
         }
 
         /* Glass Card */
         .glass-card {
-            background: rgba(30, 32, 36, 0.4);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border-radius: 48px;
-            padding: 60px 50px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(18, 20, 24, 0.4);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-radius: 40px;
+            padding: 50px 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4),
+                        inset 0 0.5px 1px rgba(255, 255, 255, 0.08);
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
             width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            background: rgba(35, 37, 42, 0.45);
-            border-color: rgba(255, 255, 255, 0.12);
         }
 
         /* OMW görseli */
         .kucuk-gorsel {
-            width: 100px;
+            width: 90px;
             height: auto;
-            border-radius: 24px;
+            border-radius: 22px;
             margin-bottom: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -379,105 +353,102 @@
 
         /* BAKIMDA animasyonu */
         .bakimda-konteynir {
-            height: 120px;
+            height: 100px;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             position: relative;
         }
 
         .bakimda-item {
-            font-size: clamp(40px, 8vw, 80px);
+            font-size: clamp(40px, 8vw, 72px);
             font-weight: 700;
             letter-spacing: -1px;
             text-transform: uppercase;
             line-height: 1.1;
             color: #FFFFFF;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
             width: 100%;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: opacity 0.4s ease;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
+            transform: translateX(-50%);
             white-space: nowrap;
         }
 
         .bakimda-item.active {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         /* Slogan animasyonu */
         .slogan-konteynir {
-            height: 45px;
+            height: 40px;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
 
         .slogan-item {
-            font-size: clamp(20px, 4vw, 26px);
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: 400;
             color: rgba(255, 255, 255, 0.7);
             letter-spacing: -0.2px;
             text-align: center;
             width: 100%;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: opacity 0.4s ease;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
+            transform: translateX(-50%);
             white-space: nowrap;
         }
 
         .slogan-item.active {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         /* Açıklama metni animasyonu */
         .aciklama-konteynir {
-            min-height: 90px;
+            min-height: 80px;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 25px 0 35px 0;
+            margin: 20px 0 30px 0;
             position: relative;
         }
 
         .aciklama-item {
-            font-size: clamp(16px, 3vw, 20px);
+            font-size: clamp(15px, 3vw, 18px);
             font-weight: 400;
-            line-height: 1.6;
+            line-height: 1.5;
             color: rgba(255, 255, 255, 0.6);
             text-align: center;
-            max-width: 750px;
+            max-width: 700px;
             width: 100%;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: opacity 0.4s ease;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
+            transform: translateX(-50%);
             padding: 0 15px;
             letter-spacing: -0.1px;
         }
 
         .aciklama-item.active {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         /* Bizi Takip Et animasyonu */
         .takip-konteynir {
-            height: 30px;
+            height: 28px;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -487,241 +458,225 @@
         }
 
         .takip-item {
-            font-size: clamp(14px, 3vw, 16px);
+            font-size: clamp(13px, 3vw, 15px);
             font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             text-align: center;
             width: 100%;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: opacity 0.4s ease;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
+            transform: translateX(-50%);
             white-space: nowrap;
-            padding: 0 10px;
         }
 
         .takip-item.active {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
-        /* Dil bayrakları */
+        /* Dil bayrakları - YENİ TASARIM */
         .dil-bayraklar {
             display: flex;
-            gap: 12px;
-            margin: 30px 0 25px 0;
+            gap: 10px;
+            margin: 25px 0 20px 0;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 0 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 0.5px solid rgba(255, 255, 255, 0.05);
         }
 
-        .bayrak {
-            width: 32px;
-            height: 32px;
+        .bayrak-item {
+            width: 36px;
+            height: 36px;
             border-radius: 12px;
-            object-fit: cover;
+            background: rgba(30, 32, 36, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
             cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.5;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .bayrak:hover {
-            transform: translateY(-3px) scale(1.05);
-            opacity: 0.9;
+        .bayrak-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .bayrak-item img {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .bayrak-item:active {
+            transform: scale(0.92);
+            background: rgba(50, 52, 58, 0.8);
+        }
+
+        .bayrak-item.active {
             border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .bayrak.active {
-            opacity: 1;
-            border-color: #FFFFFF;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* Instagram logosu */
         .instagram-link {
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             margin-top: 10px;
             text-align: center;
             width: 100%;
         }
 
-        .instagram-link:hover {
-            transform: translateY(-3px) scale(1.05);
+        .instagram-link:active {
+            transform: scale(0.95);
         }
 
         .instagram-icon {
-            font-size: 56px;
+            font-size: 48px;
             color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+            transition: all 0.2s ease;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
         }
 
-        .instagram-link:hover .instagram-icon {
+        .instagram-link:active .instagram-icon {
             color: #FFFFFF;
-            filter: drop-shadow(0 15px 30px rgba(255, 255, 255, 0.15));
         }
 
         /* Mobil uyum */
         @media (max-width: 768px) {
             .menu-container {
-                top: 20px;
-                left: 20px;
+                top: 16px;
+                left: 16px;
             }
 
             .hamburger {
-                width: 40px;
-                height: 40px;
-                padding: 7px;
-                border-radius: 14px;
+                width: 42px;
+                height: 42px;
+                padding: 9px 7px;
+                border-radius: 12px;
             }
 
             .dropdown-menu {
-                width: 320px;  /* Mobilde biraz küçüldü */
-                top: 55px;
-                padding: 20px;
+                width: 320px;
+                top: 52px;
+                padding: 18px;
             }
 
             .menu-items {
-                gap: 6px;
+                gap: 5px;
             }
 
             .menu-items a {
-                padding: 10px 12px;
-                font-size: 14px;
+                padding: 9px 12px;
+                font-size: 13px;
             }
 
             .glass-card {
-                padding: 40px 25px;
-                border-radius: 36px;
+                padding: 35px 20px;
+                border-radius: 32px;
             }
 
-            .hero {
-                padding: 70px 15px 30px 15px;
-            }
-            
             .kucuk-gorsel {
-                width: 80px;
+                width: 75px;
             }
             
             .bakimda-konteynir {
-                height: 90px;
+                height: 85px;
             }
             
             .bakimda-item {
-                font-size: clamp(36px, 7vw, 52px);
+                font-size: clamp(32px, 7vw, 48px);
                 white-space: normal;
                 word-break: keep-all;
             }
             
             .slogan-konteynir {
-                height: 40px;
+                height: 35px;
             }
             
             .slogan-item {
-                font-size: clamp(18px, 3.5vw, 22px);
+                font-size: clamp(16px, 3.5vw, 20px);
                 white-space: normal;
                 word-break: keep-all;
             }
             
             .aciklama-konteynir {
-                min-height: 120px;
-                margin: 20px 0 25px 0;
-            }
-            
-            .takip-konteynir {
-                height: 25px;
-            }
-            
-            .takip-item {
-                white-space: normal;
-                word-break: keep-all;
-            }
-            
-            .dil-bayraklar {
-                gap: 10px;
-                margin: 25px 0 20px 0;
-            }
-            
-            .bayrak {
-                width: 28px;
-                height: 28px;
-                border-radius: 10px;
-            }
-            
-            .instagram-icon {
-                font-size: 48px;
-            }
-        }
-
-        /* Çok küçük ekranlar için */
-        @media (max-width: 480px) {
-            .dropdown-menu {
-                width: 280px;
-            }
-            
-            .menu-items {
-                grid-template-columns: 1fr;  /* Tek sütun */
-            }
-            
-            .bakimda-item {
-                font-size: 32px;
-                white-space: normal;
-                word-break: keep-all;
-                line-height: 1.3;
-            }
-            
-            .slogan-item {
-                font-size: 16px;
-                white-space: normal;
-                word-break: keep-all;
+                min-height: 100px;
+                margin: 15px 0 20px 0;
             }
             
             .aciklama-item {
                 font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .takip-konteynir {
+                height: 24px;
             }
             
             .takip-item {
                 font-size: 12px;
                 letter-spacing: 1px;
+                white-space: normal;
             }
             
-            .bayrak {
-                width: 24px;
-                height: 24px;
+            .dil-bayraklar {
+                gap: 8px;
+                margin: 20px 0 15px 0;
+                padding: 6px 10px;
+            }
+            
+            .bayrak-item {
+                width: 32px;
+                height: 32px;
+                border-radius: 10px;
+            }
+            
+            .bayrak-item img {
+                width: 22px;
+                height: 22px;
+                border-radius: 6px;
+            }
+            
+            .instagram-icon {
+                font-size: 44px;
             }
         }
 
-        /* Arapça ve diğer sağdan sola diller için */
-        .bakimda-item[data-dil="ar"],
-        .slogan-item[data-dil="ar"],
-        .aciklama-item[data-dil="ar"],
-        .takip-item[data-dil="ar"] {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            letter-spacing: normal;
-        }
-
-        /* Asya dilleri için */
-        .bakimda-item[data-dil="ja"],
-        .bakimda-item[data-dil="ko"],
-        .bakimda-item[data-dil="zh"],
-        .slogan-item[data-dil="ja"],
-        .slogan-item[data-dil="ko"],
-        .slogan-item[data-dil="zh"],
-        .aciklama-item[data-dil="ja"],
-        .aciklama-item[data-dil="ko"],
-        .aciklama-item[data-dil="zh"],
-        .takip-item[data-dil="ja"],
-        .takip-item[data-dil="ko"],
-        .takip-item[data-dil="zh"] {
-            font-weight: 600;
-            letter-spacing: normal;
+        /* iOS Safe Area */
+        @supports (padding: max(0px)) {
+            .menu-container {
+                top: max(20px, env(safe-area-inset-top));
+                left: max(20px, env(safe-area-inset-left));
+            }
+            
+            .hero {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+            }
         }
     </style>
 </head>
@@ -737,9 +692,9 @@
     <!-- Hamburger Menü - OMW Tasarımı -->
     <div class="menu-container">
         <div class="hamburger" id="hamburger">
-            <span></span>  <!-- O -->
-            <span></span>  <!-- M -->
-            <span></span>  <!-- W -->
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
 
         <!-- Yatay Dikdörtgen Menü Paneli -->
@@ -769,12 +724,12 @@
     <!-- Overlay -->
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <!-- Ana içerik - Liquid Glass Card -->
+    <!-- Ana içerik -->
     <div class="hero">
         <div class="glass-card">
             <img src="img/OMW.png" alt="OnMyWay Logo" class="kucuk-gorsel">
             
-            <!-- BAKIMDA - Çoklu Dil TAM ORTALI -->
+            <!-- BAKIMDA - Çoklu Dil -->
             <div class="bakimda-konteynir">
                 <div class="bakimda-item" data-dil="tr">BAKIMDA</div>
                 <div class="bakimda-item" data-dil="en">MAINTENANCE</div>
@@ -790,7 +745,7 @@
                 <div class="bakimda-item" data-dil="zh">维护中</div>
             </div>
 
-            <!-- Yakında Hizmetinizde - Çoklu Dil TAM ORTALI -->
+            <!-- Yakında Hizmetinizde - Çoklu Dil -->
             <div class="slogan-konteynir">
                 <div class="slogan-item" data-dil="tr">Yakında Hizmetinizde</div>
                 <div class="slogan-item" data-dil="en">Coming Soon</div>
@@ -806,7 +761,7 @@
                 <div class="slogan-item" data-dil="zh">即将推出</div>
             </div>
 
-            <!-- Açıklama Metni - Çoklu Dil TAM ORTALI -->
+            <!-- Açıklama Metni - Çoklu Dil -->
             <div class="aciklama-konteynir">
                 <div class="aciklama-item" data-dil="tr">Geleceğin eğitim vizyonunu OnMyWay ile yeniden keşfetmeye hazır mısınız? Hazırlıklarımız neredeyse tamamlandı.</div>
                 <div class="aciklama-item" data-dil="en">Are you ready to rediscover the future of education with OnMyWay? Our preparations are almost complete.</div>
@@ -822,7 +777,7 @@
                 <div class="aciklama-item" data-dil="zh">您准备好通过OnMyWay重新发现教育的未来吗？我们的准备工作已接近完成。</div>
             </div>
 
-            <!-- Bizi Takip Et - Çoklu Dil TAM ORTALI -->
+            <!-- Bizi Takip Et - Çoklu Dil -->
             <div class="takip-konteynir">
                 <div class="takip-item" data-dil="tr">BİZİ TAKİP ET</div>
                 <div class="takip-item" data-dil="en">FOLLOW US</div>
@@ -838,20 +793,20 @@
                 <div class="takip-item" data-dil="zh">关注我们</div>
             </div>
 
-            <!-- Dil bayrakları -->
+            <!-- Dil bayrakları - YENİ TASARIM -->
             <div class="dil-bayraklar" id="dilBayraklar">
-                <img src="https://flagcdn.com/w40/tr.png" class="bayrak" data-dil="tr" alt="Türkçe" title="Türkçe">
-                <img src="https://flagcdn.com/w40/us.png" class="bayrak" data-dil="en" alt="English" title="English">
-                <img src="https://flagcdn.com/w40/es.png" class="bayrak" data-dil="es" alt="Español" title="Español">
-                <img src="https://flagcdn.com/w40/fr.png" class="bayrak" data-dil="fr" alt="Français" title="Français">
-                <img src="https://flagcdn.com/w40/de.png" class="bayrak" data-dil="de" alt="Deutsch" title="Deutsch">
-                <img src="https://flagcdn.com/w40/it.png" class="bayrak" data-dil="it" alt="Italiano" title="Italiano">
-                <img src="https://flagcdn.com/w40/pt.png" class="bayrak" data-dil="pt" alt="Português" title="Português">
-                <img src="https://flagcdn.com/w40/ru.png" class="bayrak" data-dil="ru" alt="Русский" title="Русский">
-                <img src="https://flagcdn.com/w40/sa.png" class="bayrak" data-dil="ar" alt="العربية" title="العربية">
-                <img src="https://flagcdn.com/w40/jp.png" class="bayrak" data-dil="ja" alt="日本語" title="日本語">
-                <img src="https://flagcdn.com/w40/kr.png" class="bayrak" data-dil="ko" alt="한국어" title="한국어">
-                <img src="https://flagcdn.com/w40/cn.png" class="bayrak" data-dil="zh" alt="中文" title="中文">
+                <div class="bayrak-item" data-dil="tr"><img src="https://flagcdn.com/w40/tr.png" alt="Türkçe"></div>
+                <div class="bayrak-item" data-dil="en"><img src="https://flagcdn.com/w40/us.png" alt="English"></div>
+                <div class="bayrak-item" data-dil="es"><img src="https://flagcdn.com/w40/es.png" alt="Español"></div>
+                <div class="bayrak-item" data-dil="fr"><img src="https://flagcdn.com/w40/fr.png" alt="Français"></div>
+                <div class="bayrak-item" data-dil="de"><img src="https://flagcdn.com/w40/de.png" alt="Deutsch"></div>
+                <div class="bayrak-item" data-dil="it"><img src="https://flagcdn.com/w40/it.png" alt="Italiano"></div>
+                <div class="bayrak-item" data-dil="pt"><img src="https://flagcdn.com/w40/pt.png" alt="Português"></div>
+                <div class="bayrak-item" data-dil="ru"><img src="https://flagcdn.com/w40/ru.png" alt="Русский"></div>
+                <div class="bayrak-item" data-dil="ar"><img src="https://flagcdn.com/w40/sa.png" alt="العربية"></div>
+                <div class="bayrak-item" data-dil="ja"><img src="https://flagcdn.com/w40/jp.png" alt="日本語"></div>
+                <div class="bayrak-item" data-dil="ko"><img src="https://flagcdn.com/w40/kr.png" alt="한국어"></div>
+                <div class="bayrak-item" data-dil="zh"><img src="https://flagcdn.com/w40/cn.png" alt="中文"></div>
             </div>
 
             <!-- Instagram logosu -->
@@ -881,67 +836,57 @@
         hamburger.addEventListener('click', toggleMenu);
         menuOverlay.addEventListener('click', toggleMenu);
 
-        // Çoklu dil animasyonu - Tüm elementler
+        // Çoklu dil animasyonu
         const bakimdaItems = document.querySelectorAll('.bakimda-item');
         const sloganItems = document.querySelectorAll('.slogan-item');
         const aciklamaItems = document.querySelectorAll('.aciklama-item');
         const takipItems = document.querySelectorAll('.takip-item');
-        const bayraklar = document.querySelectorAll('.bayrak');
+        const bayrakItems = document.querySelectorAll('.bayrak-item');
         
         let currentIndex = 0;
         let intervalId;
 
-        // Belirli bir dili göster
         function showLanguage(index) {
-            // BAKIMDA güncelle
             bakimdaItems.forEach(item => item.classList.remove('active'));
             bakimdaItems[index].classList.add('active');
             
-            // Slogan güncelle
             sloganItems.forEach(item => item.classList.remove('active'));
             sloganItems[index].classList.add('active');
             
-            // Açıklama güncelle
             aciklamaItems.forEach(item => item.classList.remove('active'));
             aciklamaItems[index].classList.add('active');
             
-            // Takip et güncelle
             takipItems.forEach(item => item.classList.remove('active'));
             takipItems[index].classList.add('active');
             
-            // Bayrak güncelle
-            bayraklar.forEach(bayrak => bayrak.classList.remove('active'));
-            if (bayraklar[index]) {
-                bayraklar[index].classList.add('active');
+            bayrakItems.forEach(item => item.classList.remove('active'));
+            if (bayrakItems[index]) {
+                bayrakItems[index].classList.add('active');
             }
         }
 
-        // Sonraki dile geç
         function nextLanguage() {
             currentIndex = (currentIndex + 1) % bakimdaItems.length;
             showLanguage(currentIndex);
         }
 
-        // Otomatik geçişi başlat
         function startAutoPlay() {
             if (intervalId) clearInterval(intervalId);
             intervalId = setInterval(nextLanguage, 4000);
         }
 
-        // Bayrak tıklaması
-        bayraklar.forEach((bayrak, index) => {
-            bayrak.addEventListener('click', () => {
+        bayrakItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
                 currentIndex = index;
                 showLanguage(currentIndex);
                 startAutoPlay();
             });
         });
 
-        // İlk dili göster (Türkçe) ve otomatik geçişi başlat
         showLanguage(0);
         startAutoPlay();
 
-        // Menü linklerine tıklayınca menüyü kapat
+        // Menü linkleri
         const menuLinks = document.querySelectorAll('.menu-items a');
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -965,6 +910,11 @@
                 dropdownMenu.classList.contains('active')) {
                 toggleMenu();
             }
+        });
+
+        // iOS viewport fix
+        window.addEventListener('resize', () => {
+            document.body.style.minHeight = window.innerHeight + 'px';
         });
     </script>
 </body>
