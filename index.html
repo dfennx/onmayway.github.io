@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cool Web Project</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,11 +19,24 @@
             background-color: #EAEFFF;
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            color: #1A1A1A; /* Okunabilirlik için koyu metin */
+            color: #1A1A1A;
+            /* Görseli ortalamak için flexbox kullanıyoruz */
+            display: flex;
+            justify-content: center;  /* Yatayda ortalama */
+            align-items: center;      /* Dikeyde ortalama */
+        }
+
+        /* Görsel için ek stiller (isteğe bağlı) */
+        .ortadaki-gorsel {
+            max-width: 90%;  /* Mobilde taşmasın */
+            height: auto;    /* Oranını korusun */
+            border-radius: 10px;  /* Hafif yuvarlak köşe (istersen kaldır) */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);  /* Hafif gölge (istersen kaldır) */
         }
     </style>
 </head>
 <body>
-
-    </body>
+    <!-- Görselimiz - NOT: Dosya yolunu kontrol et -->
+    <img src="img/OMW.png" alt="OMW Görseli" class="ortadaki-gorsel">
+</body>
 </html>
