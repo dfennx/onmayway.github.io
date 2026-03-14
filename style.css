@@ -18,7 +18,7 @@
     z-index: 999;
 }
 
-/* Işık kırılması efekti - camın ön yüzeyi */
+/* Işık kırılması efekti */
 .dropdown-menu::before {
     content: '';
     position: absolute;
@@ -27,15 +27,11 @@
     right: 0;
     bottom: 0;
     border-radius: 32px;
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.15) 0%, 
-        rgba(255, 255, 255, 0.05) 30%,
-        transparent 70%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, transparent 70%);
     pointer-events: none;
     z-index: 1;
 }
 
-/* Camın arka yüzeyinde ekstra kırılma */
 .dropdown-menu::after {
     content: '';
     position: absolute;
@@ -79,7 +75,6 @@
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
 }
 
-/* Menü öğeleri */
 .menu-items {
     list-style: none;
     display: grid;
@@ -88,10 +83,6 @@
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
-}
-
-.menu-items li {
-    margin-bottom: 0;
 }
 
 .menu-items a {
@@ -125,7 +116,6 @@
     transform: translateY(-2px);
 }
 
-/* Instagram özel item */
 .instagram-item {
     grid-column: span 3;
     margin-top: 8px;
