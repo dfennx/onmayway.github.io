@@ -18,7 +18,7 @@
     z-index: 999;
 }
 
-/* Işık kırılması efekti */
+/* Işık kırılması efekti - ön yüzey */
 .dropdown-menu::before {
     content: '';
     position: absolute;
@@ -32,6 +32,7 @@
     z-index: 1;
 }
 
+/* Arka yüzeyde ekstra kırılma */
 .dropdown-menu::after {
     content: '';
     position: absolute;
@@ -51,94 +52,4 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-}
-
-.menu-title {
-    font-size: 26px;
-    font-weight: 600;
-    color: white;
-    padding-bottom: 22px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    letter-spacing: -0.5px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 2;
-}
-
-.menu-title i {
-    font-size: 26px;
-    color: rgba(255, 255, 255, 0.95);
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
-}
-
-.menu-items {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.menu-items a {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 15px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.2s ease;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-}
-
-.menu-items a i {
-    width: 20px;
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.7);
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
-}
-
-.menu-items a:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-}
-
-.instagram-item {
-    grid-column: span 3;
-    margin-top: 8px;
-}
-
-.instagram-item a {
-    background: rgba(225, 48, 108, 0.15);
-    border-color: rgba(225, 48, 108, 0.25);
-    justify-content: center;
-    font-weight: 600;
-    padding: 16px;
-    color: white;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.instagram-item a i {
-    color: #E1306C;
-    font-size: 18px;
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
-}
-
-.instagram-item a:hover {
-    background: rgba(225, 48, 108, 0.2);
-    border-color: rgba(225, 48, 108, 0.35);
 }
